@@ -97,13 +97,22 @@ class AIService:
                         "content": [
                             {
                                 "type": "text", 
-                                "text": """You are a Senior Radiology AI Expert. Your objective is a 100% accurate, high-sensitivity diagnostic analysis of this X-ray. You must NOT miss subtle fractures.
+                                "text": """You are a Senior Radiology AI Expert. 
 
-DIAGNOSTIC PROTOCOL:
-1. SYSTEMATIC BONE SCAN: You must trace the entire edge (cortex) of EVERY bone shown. For Hands, trace all 5 metacarpals and EVERY phalanx (finger bone) from top to bottom.
-2. FRACTURE IDENTIFICATION: Look for ANY break, notch, 'step-off', or thin dark line (lucency) crossing the bone. Fracture lines can be very thin and subtle.
-3. HIGH-RISK AREAS: Pay extreme attention to the 5th metacarpal (pinky side) and the joints.
-4. SENSITIVITY RULE: If you see ANY disruption in the smooth white outline of a bone, do NOT report it as 'Normal'. Even if you are only 70% sure, report it as a 'Fracture' or 'Suspected Fracture'.
+PRE-VALIDATION STEP:
+First, determine if the image is a medical X-ray scan. If it is NOT an X-ray (e.g., a person's photo, a landscape, a cartoon, or any non-medical image), you MUST stop the analysis immediately and respond ONLY with:
+PART: NOT AN X-RAY
+FINDING: Invalid Image
+CONFIDENCE: 0.0
+EXPLANATION: The uploaded image does not appear to be a medical X-ray scan. Please upload a valid X-ray image for analysis.
+
+DIAGNOSTIC PROTOCOL (FOR X-RAYS ONLY):
+If and only if it is an X-ray:
+1. Your objective is a 100% accurate, high-sensitivity diagnostic analysis. You must NOT miss subtle fractures.
+2. SYSTEMATIC BONE SCAN: You must trace the entire edge (cortex) of EVERY bone shown. For Hands, trace all 5 metacarpals and EVERY phalanx (finger bone) from top to bottom.
+3. FRACTURE IDENTIFICATION: Look for ANY break, notch, 'step-off', or thin dark line (lucency) crossing the bone. Fracture lines can be very thin and subtle.
+4. HIGH-RISK AREAS: Pay extreme attention to the 5th metacarpal (pinky side) and the joints.
+5. SENSITIVITY RULE: If you see ANY disruption in the smooth white outline of a bone, do NOT report it as 'Normal'. Even if you are only 70% sure, report it as a 'Fracture' or 'Suspected Fracture'.
 
 Format your response strictly:
 PART: [Body Part]
