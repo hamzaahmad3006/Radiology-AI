@@ -127,9 +127,10 @@ EXPLANATION: [List exactly which bone was traced and where the disruption was fo
             
             # LOGGING: Save to a local file for debugging
             log_entry = f"\n--- {os.path.basename(image_path)} ---\n{response}\n------------------\n"
-            with open("vision_debug.log", "a") as f:
+            log_file = "/tmp/vision_debug.log" if os.environ.get("VERCEL") else "vision_debug.log"
+            with open(log_file, "a") as f:
                 f.write(log_entry)
-            print(f"Vision Log saved to vision_debug.log")
+            print(f"Vision Log saved to {log_file}")
 
             # Parse response - robust parsing
             result = {

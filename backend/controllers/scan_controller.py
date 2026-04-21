@@ -10,7 +10,7 @@ class ScanController:
     @staticmethod
     def upload_and_analyze(file: UploadFile, db: Session):
         # Save file
-        upload_dir = "uploads"
+        upload_dir = "/tmp/uploads" if os.environ.get("VERCEL") else "uploads"
         if not os.path.exists(upload_dir):
             os.makedirs(upload_dir)
             
