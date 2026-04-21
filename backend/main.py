@@ -9,7 +9,10 @@ import os
 # Initialize database
 init_db()
 
-app = FastAPI(title="RadiologyAI Assistant API")
+app = FastAPI(
+    title="RadiologyAI Assistant API",
+    root_path="/api" if os.environ.get("VERCEL") else ""
+)
 
 # Configure CORS
 app.add_middleware(
