@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-multipart
+groq
+pydantic
+sqlalchemy
+numpy
+opencv-python-headless
+pillow
+python-dotenv
+passlib[bcrypt]
+python-jose[cryptography]
+email-validator
+psycopg2-binary
