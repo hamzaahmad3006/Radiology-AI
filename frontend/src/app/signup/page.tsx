@@ -1,4 +1,4 @@
-import Signup from "@/pages/Auth/Signup";
+import Signup from "@/views/Auth/Signup";
 
 export default function SignupPage() {
   return <Signup />;

@@ -1,4 +1,4 @@
-import History from "@/pages/History/History";
+import History from "@/views/History/History";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function HistoryPage() {

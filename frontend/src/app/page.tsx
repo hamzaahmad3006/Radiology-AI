@@ -1,4 +1,4 @@
-import Home from "@/pages/Home/Home";
+import Home from "@/views/Home/Home";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 export default function Page() {
