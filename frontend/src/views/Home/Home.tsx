@@ -123,7 +123,7 @@ const Home = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="relative aspect-square rounded-xl overflow-hidden glass border-white/5">
                     <img 
-                      src={`${API_BASE_URL}/${result.image_path}`} 
+                      src={result.image_path.startsWith('http') ? result.image_path : `${API_BASE_URL}/${result.image_path}`} 
                       alt="Analyzed X-ray" 
                       className="w-full h-full object-cover"
                     />

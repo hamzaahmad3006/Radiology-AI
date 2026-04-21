@@ -73,7 +73,7 @@ const History = () => {
               <Card key={scan.id} className="group p-0 overflow-hidden hover:scale-[1.02] transition-all border-white/5 hover:border-primary/30 flex flex-col h-full bg-white/5 shadow-2xl backdrop-blur-xl">
                 <div className="relative h-60 w-full bg-black/40">
                   <img 
-                    src={`${API_BASE_URL}/${scan.image_path}`} 
+                    src={scan.image_path.startsWith('http') ? scan.image_path : `${API_BASE_URL}/${scan.image_path}`} 
                     alt={scan.prediction} 
                     className="w-full h-full object-contain p-2"
                   />
@@ -130,7 +130,7 @@ const History = () => {
             <div className="space-y-6">
               <div className="relative aspect-auto min-h-[200px] w-full rounded-2xl overflow-hidden glass border-white/10 bg-black/40">
                 <img 
-                  src={`${API_BASE_URL}/${selectedScan.image_path}`} 
+                  src={selectedScan.image_path.startsWith('http') ? selectedScan.image_path : `${API_BASE_URL}/${selectedScan.image_path}`} 
                   alt={selectedScan.prediction} 
                   className="w-full h-full object-contain max-h-[50vh] p-4"
                 />
