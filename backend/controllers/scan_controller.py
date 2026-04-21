@@ -3,6 +3,7 @@ import shutil
 from sqlalchemy.orm import Session
 from models.scan_model import Scan
 from services.ai_service import AIService
+from services.cloudinary_service import CloudinaryService
 from fastapi import UploadFile
 import uuid
 
@@ -24,9 +25,16 @@ class ScanController:
         # Analyze image using Vision AI (Supports all X-rays)
         analysis = AIService.analyze_vision(file_path)
         
-        # Create DB record
+        # Upload to Cloudinary for persistent storage
+        cloudinary_url = CloudinaryService.upload_image(file_path)
+        
+        # Delete temporary local file
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            
+        # Create DB record using Cloudinary URL
         new_scan = Scan(
-            image_path=file_path,
+            image_path=cloudinary_url if cloudinary_url else file_path,
             prediction=f"{analysis['body_part']}: {analysis['prediction']}",
             confidence=analysis["confidence"],
             explanation=analysis["explanation"],
@@ -63,8 +71,11 @@ class ScanController:
         if not scan:
             return False
             
-        # Delete the image file if it exists
-        if os.path.exists(scan.image_path):
+        # Delete from Cloudinary if it's a Cloudinary URL
+        if scan.image_path and "cloudinary" in scan.image_path:
+            CloudinaryService.delete_image(scan.image_path)
+        # Delete the image file if it exists locally
+        elif scan.image_path and os.path.exists(scan.image_path):
             os.remove(scan.image_path)
             
         # Delete database record
